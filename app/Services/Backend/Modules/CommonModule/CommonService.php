@@ -53,4 +53,9 @@ class CommonService
 
           return $time;
      }
+
+     public function convert_second_to_day($second){
+          $secondsInADay = 86400;
+          return floor($second / $secondsInADay);
+     }
 }

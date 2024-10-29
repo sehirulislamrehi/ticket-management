@@ -135,6 +135,7 @@ return [
     'providers' => ServiceProvider::defaultProviders()->merge([
         App\Providers\Modules\UserModule\RoleServiceProvider::class,
         App\Providers\Modules\UserModule\UserServiceProvider::class,
+        App\Providers\Modules\ComplaintModule\ComplaintServiceProvider::class,
     ])->toArray(),
 
     /*

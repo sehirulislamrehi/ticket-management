@@ -14,8 +14,8 @@ use App\Services\Backend\Modules\UserModule\User\UserService;
 class UserController extends Controller
 {
 
-    protected $user_service;
-    protected $common_service;
+    protected UserService $user_service;
+    protected CommonService $common_service;
 
     public function __construct(
         UserService $user_service,

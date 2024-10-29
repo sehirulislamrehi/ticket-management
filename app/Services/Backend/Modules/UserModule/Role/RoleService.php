@@ -5,16 +5,18 @@ namespace App\Services\Backend\Modules\UserModule\Role;
 use App\Interfaces\UserModule\Role\RoleReadInterface;
 use App\Interfaces\UserModule\Role\RoleWriteInterface;
 use App\Models\UserModule\Module;
+use App\Models\UserModule\Role;
 use App\Traits\ApiResponseTrait;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class RoleService
 {
 
     use ApiResponseTrait;
-    protected $role_read_repository;
-    protected $role_write_repository;
+    protected RoleReadInterface $role_read_repository;
+    protected RoleWriteInterface $role_write_repository;
 
     public function __construct(RoleReadInterface $role_read_interface, RoleWriteInterface $role_write_interface)
     {
@@ -35,7 +37,7 @@ class RoleService
     {
         if (can('roles')) {
             $roles = $this->role_read_repository->get_all_role_data();
-            return $this->role_read_repository->role_datatable($roles);
+            return $this->make_role_datatable($roles);
         } else {
             return view("errors.403");
         }
@@ -61,8 +63,7 @@ class RoleService
             if (can('roles')) {
                 DB::beginTransaction();
                 return $this->role_write_repository->create($request);
-            } 
-            else {
+            } else {
                 return $this->warning(null, unauthorized());
             }
         } catch (Exception $e) {
@@ -92,12 +93,10 @@ class RoleService
             if (can('roles')) {
                 DB::beginTransaction();
                 return $this->role_write_repository->update($request, $id);
-            } 
-            else {
+            } else {
                 return $this->warning(null, unauthorized());
             }
-        } 
-        catch (Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack();
             return $this->error(null, $e->getMessage());
         }
@@ -118,6 +117,31 @@ class RoleService
             throw new Exception($e->getMessage());
         }
     }
-}
 
-?>
+    public function make_role_datatable($roles)
+    {
+        return DataTables::of($roles)
+            ->addIndexColumn()
+            ->order(function ($roles) {
+                $roles->orderBy('id', 'desc');  // Apply ordering here
+            })
+            ->rawColumns(['action', 'is_active'])
+            ->editColumn('is_active', function (Role $role) {
+                if ($role->is_active == true) {
+                    return '<p class="badge badge-success">Active</p>';
+                } else {
+                    return '<p class="badge badge-danger">Inactive</p>';
+                }
+            })
+            ->addColumn('action', function (Role $role) {
+                return '
+            ' . (can("roles") ? '
+                <button type="button" data-content="' . route('role.edit', $role->id) . '" data-target="#largeModal" class="btn btn-outline-dark" data-toggle="modal">
+                    Edit
+                </button>
+            ' : '') . '
+        ';
+            })
+            ->make(true);
+    }
+}

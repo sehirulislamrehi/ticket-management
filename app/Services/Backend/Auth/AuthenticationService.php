@@ -10,7 +10,7 @@ class AuthenticationService
 {
 
      use ApiResponseTrait;
-     protected $user_read_repository;
+     protected UserReadInterface $user_read_repository;
 
      public function __construct(UserReadInterface $user_read_interface)
      {

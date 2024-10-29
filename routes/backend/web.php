@@ -15,6 +15,10 @@ Route::group(['prefix' => 'admindashboard', 'middleware' => 'admin_auth'], funct
         require_once "user_module/user.php";
     });
 
+    Route::group(['prefix' => 'complaint-module'], function(){
+        require_once "complaint_module/complaint.php";
+    });
+
     Route::group(['prefix' => 'report-module'], function(){
         require_once "report_module/dashboard.php";
     });

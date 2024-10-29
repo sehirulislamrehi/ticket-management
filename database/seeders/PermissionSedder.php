@@ -54,6 +54,30 @@ class PermissionSedder extends Seeder
                 'display_name' => 'Roles',
                 'module_id' => 1,
             ],
+            [
+                'id' => 7,
+                'key' => 'complaint_module',
+                'display_name' => 'Complaint Module',
+                'module_id' => 2,
+            ],
+            [
+                'id' => 8,
+                'key' => 'complaint',
+                'display_name' => '- Complaint',
+                'module_id' => 2,
+            ],
+            [
+                'id' => 9,
+                'key' => 'add_complaint',
+                'display_name' => '-- Add Complaint',
+                'module_id' => 2,
+            ],
+            [
+                'id' => 10,
+                'key' => 'edit_complaint',
+                'display_name' => '-- Edit Complaint',
+                'module_id' => 2,
+            ],
         ]);
     }
 }

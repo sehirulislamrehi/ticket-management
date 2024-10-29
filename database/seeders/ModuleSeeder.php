@@ -24,6 +24,14 @@ class ModuleSeeder extends Seeder
                 'position' => 1,
                 'route' => null
             ],
+            [
+                'id' => 2,
+                'name' => 'Complaint Module',
+                'key' => 'complaint_module',
+                'icon' => 'fas fa-bullhorn',
+                'position' => 2,
+                'route' => null
+            ],
         ]);
     }
 }

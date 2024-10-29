@@ -38,6 +38,16 @@ class SubModuleSeeder extends Seeder
             ],
             //module id 1 end
         
+            //module id 2 start
+            [
+                'id' => 3,
+                'name' => 'Complaint',
+                'key' => 'complaint',
+                'position' => 1,
+                'route' => 'complaint.all',
+                'module_id' => 2,
+            ],
+            //module id 2 end
         ]);
 
         //last id 3
