@@ -13,5 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//For hishab x
-require_once "api/api.php";
+
+require_once "api/auth/auth.php";
+
+Route::middleware('auth:sanctum')->group(function () {
+    require_once "api/modules/complaint_module/complaint.php";
+});
