@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Modules\ComplaintModule\Complaint\CreateComplaintRequest;
 use App\Http\Requests\Backend\Modules\ComplaintModule\Complaint\EditComplaintRequest;
 use App\Services\Backend\Modules\ComplaintModule\Complaint\ComplaintService;
+use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
@@ -19,8 +20,8 @@ class ComplaintController extends Controller
     public function index(){
         return $this->complaint_service->index();
     }
-    public function data(){
-        return $this->complaint_service->data();
+    public function data(Request $request){
+        return $this->complaint_service->data($request->all());
     }
     public function add_modal(){
         return $this->complaint_service->add_modal();

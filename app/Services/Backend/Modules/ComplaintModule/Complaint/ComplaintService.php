@@ -34,7 +34,10 @@ class ComplaintService
     {
         if (can('complaint')) {
             try {
-                return view("backend.modules.complaint_module.complaint.index");
+                $complaint_category = $this->get_complaint_category();
+                $complaint_priority = $this->get_complaint_priority();
+                $complaint_status = $this->get_complaint_status();
+                return view("backend.modules.complaint_module.complaint.index", compact("complaint_category","complaint_priority","complaint_status"));
             } catch (Exception $e) {
                 return back()->with('error', $e->getMessage());
             }
@@ -43,12 +46,11 @@ class ComplaintService
         }
     }
 
-    public function data()
+    public function data($request)
     {
         if (can('complaint')) {
             try {
-                $params = [];
-                $complaints = $this->complaint_read_repository->fetch_all_complaint($params);
+                $complaints = $this->complaint_read_repository->fetch_all_complaint($request);
                 return $this->make_complaint_datatable($complaints);
             } catch (Exception $e) {
                 return $e->getMessage();

@@ -4,7 +4,7 @@
 <link href="{{ asset('backend/css/datatable/jquery.dataTables.min.css') }}" rel="stylesheet">
 <link href="{{ asset('backend/css/datatable/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <style>
-    #datatable_filter{
+    #datatable_filter {
         display: none;
     }
 </style>
@@ -20,6 +20,13 @@
     </div>
 
     <div class="br-pagebody">
+        <div class="card card-primary mb-3">
+            <div class="card-body">
+                <div class="row">
+                    @include("backend.modules.complaint_module.complaint.widgets.search")
+                </div>
+            </div>
+        </div>
         <div class="card card-primary">
             <div class="card-header">
                 @if( can("add_complaint") )
@@ -78,6 +85,14 @@
             ajax: {
                 url: "{{ route('complaint.data') }}",
                 type: 'GET',
+                data: function(data) {
+                    data.title = $('#search-title').val();
+                    data.category = $('#search-category').val();
+                    data.priority = $('#search-priority').val();
+                    data.status = $('#search-status').val();
+                    data.submission_date = $('#search-submission_date').val();
+                    data.created_at = $('#search-created_date').val();
+                }
             },
             order: [
                 [0, 'ASC']
@@ -104,13 +119,13 @@
                     data: 'priority',
                     name: 'priority',
                     orderable: false,
-                    searchable: true
+                    searchable: false
                 },
                 {
                     data: 'status',
                     name: 'status',
                     orderable: false,
-                    searchable: true
+                    searchable: false
                 },
                 {
                     data: 'created_by',
@@ -152,5 +167,16 @@
         });
     });
 </script>
-
+<script>
+    function doSearch() {
+        $(".custom-datatable").DataTable().ajax.reload();
+    }
+</script>
+<script>
+    function clearSearch() {
+        $('input').val('');
+        $('select').val('').trigger('update');
+        doSearch();
+    }
+</script>
 @endsection

@@ -14,6 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin_auth' => \App\Http\Middleware\Authenticate::class,
+            'custom.auth' => \App\Http\Middleware\CustomScantumAuth::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

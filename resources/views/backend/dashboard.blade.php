@@ -14,9 +14,10 @@
         margin-bottom: 0;
     }
 
-    #spinner{
+    #spinner {
         z-index: 99;
     }
+
     #spinner:not([hidden]) {
         position: fixed;
         top: 0;
@@ -61,14 +62,24 @@
     <div class="br-pagebody">
         <div class="row d-flex align-items-stretch">
 
-            <!-- task_counting -->
+            <!-- status_report -->
             <div class="col-md-12 mb-3">
-                {{-- @include("backend.modules.report_module.dashboard_report.task_counting.index") --}}
+                @include("backend.modules.report_module.dashboard_report.status_report.index")
             </div>
 
-            <!-- highest_task_completed_user_list -->
+            <!-- category_report -->
             <div class="col-md-6 mb-3">
-                {{-- @include("backend.modules.report_module.dashboard_report.highest_task_completed_user_list.index") --}}
+                @include("backend.modules.report_module.dashboard_report.category_report.index")
+            </div>
+
+            <!-- priority_report -->
+            <div class="col-md-6 mb-3">
+                @include("backend.modules.report_module.dashboard_report.priority_report.index")
+            </div>
+
+            <!-- over_time_report -->
+            <div class="col-md-6 mb-3">
+                @include("backend.modules.report_module.dashboard_report.over_time_report.index")
             </div>
 
             <!-- highest_average_time_taken_user -->
@@ -87,8 +98,9 @@
 <script>
     const spinner = document.getElementById("spinner");
 </script>
-@include("backend.modules.report_module.dashboard_report.task_counting.script")
-@include("backend.modules.report_module.dashboard_report.highest_task_completed_user_list.script")
-@include("backend.modules.report_module.dashboard_report.highest_average_time_taken_user.script")
+@include("backend.modules.report_module.dashboard_report.status_report.script")
+@include("backend.modules.report_module.dashboard_report.priority_report.script")
+@include("backend.modules.report_module.dashboard_report.category_report.script")
+@include("backend.modules.report_module.dashboard_report.over_time_report.script")
 
 @endsection

@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 //user start 
 Route::group(['prefix' => 'dashboard-report'], function () {
-    Route::get("task-counting", [DashboardReportController::class, 'task_counting'])->name('dashboard.report.task.counting');
-    Route::get("highest-compelte-task-user", [DashboardReportController::class, 'highest_complete_task_user'])->name('dashboard.report.highest.complete.task.user');
-    Route::get("highest-average-time-taken-user", [DashboardReportController::class, 'highest_average_time_taken_user'])->name('dashboard.report.highest.average.time.taken.user');
+    Route::get("complaint/status/report", [DashboardReportController::class, 'status_report'])->name('dashboard.status.report');
+    Route::get("complaint/priority/report", [DashboardReportController::class, 'priority_report'])->name('dashboard.priority.report');
+    Route::get("complaint/category/report", [DashboardReportController::class, 'category_report'])->name('dashboard.category.report');
+    Route::get("complaint/over/time", [DashboardReportController::class, 'over_time_report'])->name('dashboard.over.time.report');
 });
 //user end

@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 require_once "api/auth/auth.php";
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('custom.auth')->group(function () {
     require_once "api/modules/complaint_module/complaint.php";
 });

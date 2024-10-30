@@ -7,6 +7,7 @@ use App\Interfaces\ComplaintModule\Complaint\ComplaintWriteInterface;
 use App\Models\ComplaintModule\Complaint;
 use App\Services\Backend\Modules\CommonModule\CommonService;
 use App\Traits\FilePathTrait;
+use Illuminate\Support\Facades\Auth;
 
 class ComplaintWriteRepository implements ComplaintWriteInterface
 {
@@ -18,7 +19,7 @@ class ComplaintWriteRepository implements ComplaintWriteInterface
     public function __construct(CommonService $common_service)
     {
         $this->common_service = $common_service;
-        $this->auth = auth('web')->user();
+        $this->auth = auth('web')->check() ? auth('web')->user() : Auth::guard("sanctum")->user();
     }
 
     public function add($request){
@@ -91,6 +92,16 @@ class ComplaintWriteRepository implements ComplaintWriteInterface
             $complaint->image = null;
        }
 
+        return $complaint->save();
+    }
+
+    public function update_complaint_status_for_api($status, $complaint){
+        if($status === ComplaintStatusEnum::resolved->value){
+            $complaint->resolved_at = date("Y-m-d");
+            $complaint->time_taken = $this->common_service->convert_two_date_to_second($complaint->resolved_at, $complaint->submission_date);
+            $complaint->day_taken = $this->common_service->convert_second_to_day($complaint->time_taken);
+        }
+        $complaint->status = $status;
         return $complaint->save();
     }
 

@@ -2,50 +2,33 @@
 
 namespace App\Http\Controllers\Backend\ReportModule\Dashboard;
 
-use App\Http\Controllers\Controller;
-use App\Interfaces\TaskModule\Tasks\TaskReadInterface;
-use App\Traits\ApiResponseTrait;
-use Exception;
+use App\Services\Backend\Modules\ReportingModule\Dashboard\DashboardReportService;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardReportController extends Controller
 {
     
-    use ApiResponseTrait;
-    protected $task_read_repository;
+    protected DashboardReportService $dashboard_report_service;
 
-    public function __construct(TaskReadInterface $task_read_interface)
+    public function __construct(DashboardReportService $dashboard_report_service)
     {
-        $this->task_read_repository = $task_read_interface;   
+        $this->dashboard_report_service = $dashboard_report_service;
     }
 
-    public function task_counting(){
-        try{
-            $response = $this->task_read_repository->get_task_counting();
-            return $this->success($response, "Task counting");
-        }
-        catch( Exception $e ){
-            return $this->error(null, $e->getMessage());
-        }
+    public function status_report(){
+        return $this->dashboard_report_service->status_report();
     }
 
-    public function highest_complete_task_user(){
-        try{
-            $response = $this->task_read_repository->get_highest_task_solve_user_list();
-            return $this->success($response, "Highest complete task user");
-        }
-        catch( Exception $e ){
-            return $this->error(null, $e->getMessage());
-        }
+    public function priority_report(){
+        return $this->dashboard_report_service->priority_report();
     }
 
-    public function highest_average_time_taken_user(){
-        try{
-            $response = $this->task_read_repository->get_highest_average_time_taken_user();
-            return $this->success($response, "Highest average time taken user");
-        }
-        catch( Exception $e ){
-            return $this->error(null, $e->getMessage());
-        }
+    public function category_report(){
+        return $this->dashboard_report_service->category_report();
+    }
+
+    public function over_time_report(){
+        return $this->dashboard_report_service->over_time_report();
     }
 }
