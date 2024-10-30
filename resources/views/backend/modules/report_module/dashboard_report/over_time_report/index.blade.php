@@ -13,7 +13,8 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-12" id="over_time_report"></div>
+            <div class="col-md-6" id="over_time_report"></div>
+            <div class="col-md-6" id="resolved_ratio_report"></div>
         </div>
     </div>
 </div>

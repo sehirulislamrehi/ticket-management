@@ -63,7 +63,7 @@
         <div class="row d-flex align-items-stretch">
 
             <!-- status_report -->
-            <div class="col-md-12 mb-3">
+            <div class="col-md-6 mb-3">
                 @include("backend.modules.report_module.dashboard_report.status_report.index")
             </div>
 
@@ -73,19 +73,15 @@
             </div>
 
             <!-- priority_report -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-12 mb-3">
                 @include("backend.modules.report_module.dashboard_report.priority_report.index")
             </div>
 
             <!-- over_time_report -->
-            <div class="col-md-6 mb-3">
+            <div class="col-md-12 mb-3">
                 @include("backend.modules.report_module.dashboard_report.over_time_report.index")
             </div>
 
-            <!-- highest_average_time_taken_user -->
-            <div class="col-md-6 mb-3">
-                {{-- @include("backend.modules.report_module.dashboard_report.highest_average_time_taken_user.index") --}}
-            </div>
 
         </div>
     </div>

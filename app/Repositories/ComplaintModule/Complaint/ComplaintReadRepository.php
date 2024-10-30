@@ -125,13 +125,21 @@ class ComplaintReadRepository implements ComplaintReadInterface
     }
 
     public function fetch_over_time_report(){
-        $twoMonthsAgo = date('Y-m-01', strtotime('-2 months'));
-        $data = DB::table('complaints')
+        $twoMonthsAgo = now()->subMonths(4)->startOfMonth();
+        $resolved = ComplaintStatusEnum::resolved->value;
+        $closed = ComplaintStatusEnum::closed->value;
+        return DB::table('complaints')
             ->select(
-                DB::raw('YEAR(complaints.created_at) as year'),
-                DB::raw('MONTHNAME(complaints.created_at) as month'),
-                DB::raw('COUNT(*) as total_tickets')
+                DB::raw('YEAR(created_at) as year'),
+                DB::raw('MONTHNAME(created_at) as month'),
+                DB::raw('COUNT(*) as complaint_submitted'),
+                DB::raw('SUM(CASE WHEN status = "'.$resolved.'" THEN 1 ELSE 0 END) as total_resolved'), 
+                DB::raw('SUM(CASE WHEN status = "'.$closed.'" THEN 1 ELSE 0 END) as total_closed')
             )
-            ->where('ticket_details.created_at', '>=', $twoMonthsAgo);
+            ->where('created_at', '>=', $twoMonthsAgo)
+            ->groupBy('year', 'month') // Group by year and month without referencing created_at directly
+            ->orderBy('year', 'desc')
+            ->orderBy(DB::raw('MONTH(created_at)'), 'asc')
+            ->get();
     }
 }
