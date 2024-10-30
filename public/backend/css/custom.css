@@ -198,3 +198,14 @@ table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd{
 table.dataTable{
     border: unset!important;
 }
+#notification-list{
+
+}
+#notification-list li{
+    padding: 12px;
+    border-bottom: 1px solid #a0a7b8;
+    cursor: pointer;
+}
+#notification-list li:hover{
+    background: #efefef;
+}

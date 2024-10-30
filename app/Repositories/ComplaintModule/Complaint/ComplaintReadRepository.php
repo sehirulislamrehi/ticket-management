@@ -22,10 +22,11 @@ class ComplaintReadRepository implements ComplaintReadInterface
     }
 
     public function fetch_all_complaint($params){
+        $auth = $this->auth;
         $query = Complaint::query()->with("created_user");
 
-        if( isset($params['user_id']) ){
-            $query->where("created_by", $params['user_id']);
+        if(!$this->auth->is_super_admin){
+            $query->where("created_by", $auth->id);
         }
 
         if( isset($params['title']) ){
@@ -74,14 +75,27 @@ class ComplaintReadRepository implements ComplaintReadInterface
 
     public function fetch_status_counting(){
 
+        $auth = $this->auth;
         $today = Carbon::today()->format('Y-m-d') ." 23:59:59";
         $thirty_days_before = Carbon::today()->subDays(30)->format('Y-m-d') ." 00:00:00";
-        $query = Complaint::query()->where("created_at",">=",$thirty_days_before)->where("created_at","<=",$today)->get();
+        $query = Complaint::query()->select("status","created_by")->where("created_at",">=",$thirty_days_before)->where("created_at","<=",$today)->get();
 
-        $open = (clone $query)->select("status")->where("status",ComplaintStatusEnum::open->value)->count();
-        $in_progress = (clone $query)->select("status")->where("status",ComplaintStatusEnum::in_progress->value)->count();
-        $resolved = (clone $query)->select("status")->where("status",ComplaintStatusEnum::resolved->value)->count();
-        $closed = (clone $query)->select("status")->where("status",ComplaintStatusEnum::closed->value)->count();
+        $open_query = (clone $query)->where("status",ComplaintStatusEnum::open->value);
+        $in_progress_query = (clone $query)->where("status",ComplaintStatusEnum::in_progress->value);
+        $resolved_query = (clone $query)->where("status",ComplaintStatusEnum::resolved->value);
+        $closed_query = (clone $query)->where("status",ComplaintStatusEnum::closed->value);
+
+        if(!$auth->is_super_admin){
+            $open_query = $open_query->where("created_by", $auth->id);
+            $in_progress_query = $in_progress_query->where("created_by", $auth->id);
+            $resolved_query = $resolved_query->where("created_by", $auth->id);
+            $closed_query = $closed_query->where("created_by", $auth->id);
+        }
+
+        $open = $open_query->count();
+        $in_progress = $in_progress_query->count();
+        $resolved = $resolved_query->count();
+        $closed = $closed_query->count();
 
         return [
             "open" => $open,
@@ -93,13 +107,18 @@ class ComplaintReadRepository implements ComplaintReadInterface
     }
 
     public function fetch_priority_counting(){
+        $auth = $this->auth;
         $today = Carbon::today()->format('Y-m-d') ." 23:59:59";
         $thirty_days_before = Carbon::today()->subDays(30)->format('Y-m-d') ." 00:00:00";
-        $query = Complaint::query()->where("created_at",">=",$thirty_days_before)->where("created_at","<=",$today)->get();
+        $query = Complaint::query()->select("priority","created_by")->where("created_at",">=",$thirty_days_before)->where("created_at","<=",$today)->get();
 
-        $low = (clone $query)->select("priority")->where("priority",ComplaintPriorityEnum::low->value)->count();
-        $medium = (clone $query)->select("priority")->where("priority",ComplaintPriorityEnum::medium->value)->count();
-        $high = (clone $query)->select("priority")->where("priority",ComplaintPriorityEnum::high->value)->count();
+        if(!$auth->is_super_admin){
+            $query = $query->where("created_by", $auth->id);
+        }
+
+        $low = (clone $query)->where("priority",ComplaintPriorityEnum::low->value)->count();
+        $medium = (clone $query)->where("priority",ComplaintPriorityEnum::medium->value)->count();
+        $high = (clone $query)->where("priority",ComplaintPriorityEnum::high->value)->count();
 
         return [
             "low" => $low,
@@ -109,13 +128,18 @@ class ComplaintReadRepository implements ComplaintReadInterface
     }
 
     public function fetch_category_counting(){
+        $auth = $this->auth;
         $today = Carbon::today()->format('Y-m-d') ." 23:59:59";
         $thirty_days_before = Carbon::today()->subDays(30)->format('Y-m-d') ." 00:00:00";
-        $query = Complaint::query()->where("created_at",">=",$thirty_days_before)->where("created_at","<=",$today)->get();
+        $query = Complaint::query()->select("category","created_by")->where("created_at",">=",$thirty_days_before)->where("created_at","<=",$today)->get();
 
-        $billing = (clone $query)->select("category")->where("category",ComplaintCategoryEnum::billing->value)->count();
-        $service_issue = (clone $query)->select("category")->where("category",ComplaintCategoryEnum::service_issue->value)->count();
-        $product_issue = (clone $query)->select("category")->where("category",ComplaintCategoryEnum::product_issue->value)->count();
+        if(!$auth->is_super_admin){
+            $query = $query->where("created_by", $auth->id);
+        }
+
+        $billing = (clone $query)->where("category",ComplaintCategoryEnum::billing->value)->count();
+        $service_issue = (clone $query)->where("category",ComplaintCategoryEnum::service_issue->value)->count();
+        $product_issue = (clone $query)->where("category",ComplaintCategoryEnum::product_issue->value)->count();
 
         return [
             "billing" => $billing,
@@ -125,21 +149,26 @@ class ComplaintReadRepository implements ComplaintReadInterface
     }
 
     public function fetch_over_time_report(){
+        $auth = $this->auth;
         $twoMonthsAgo = now()->subMonths(4)->startOfMonth();
         $resolved = ComplaintStatusEnum::resolved->value;
         $closed = ComplaintStatusEnum::closed->value;
-        return DB::table('complaints')
+        $query = DB::table('complaints')
             ->select(
                 DB::raw('YEAR(created_at) as year'),
                 DB::raw('MONTHNAME(created_at) as month'),
                 DB::raw('COUNT(*) as complaint_submitted'),
                 DB::raw('SUM(CASE WHEN status = "'.$resolved.'" THEN 1 ELSE 0 END) as total_resolved'), 
-                DB::raw('SUM(CASE WHEN status = "'.$closed.'" THEN 1 ELSE 0 END) as total_closed')
+                DB::raw('SUM(CASE WHEN status = "'.$closed.'" THEN 1 ELSE 0 END) as total_closed'),
             )
-            ->where('created_at', '>=', $twoMonthsAgo)
-            ->groupBy('year', 'month') // Group by year and month without referencing created_at directly
-            ->orderBy('year', 'desc')
-            ->orderBy(DB::raw('MONTH(created_at)'), 'asc')
-            ->get();
+            ->where('created_at', '>=', $twoMonthsAgo);
+
+        if(!$auth->is_super_admin){
+            $query = $query->where("created_by", $auth->id);
+        }
+
+        return $query->groupBy('year', 'month') // Group by year and month without referencing created_at directly
+        ->orderBy('year', 'desc')
+        ->orderBy(DB::raw('MONTH(created_at)'), 'asc')->get();
     }
 }

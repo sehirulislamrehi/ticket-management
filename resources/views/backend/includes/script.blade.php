@@ -8,5 +8,4 @@
 <script src="{{ asset('backend/js/brackets/ResizeSensor.js') }}"></script>
 <script src="{{ asset('backend/js/brackets/dashboard.js') }}"></script>
 
-
 @yield("per_page_js")

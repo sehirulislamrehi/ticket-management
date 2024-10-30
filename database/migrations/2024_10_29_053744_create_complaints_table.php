@@ -28,6 +28,9 @@ return new class extends Migration
             $table->string("time_taken")->default(0)->comment("value stored in sec.");
             $table->string("day_taken")->default(0);
             $table->timestamps();
+
+            $table->foreign("created_by")->references("id")->on("users")->onDelete("restrict");
+
         });
     }
 

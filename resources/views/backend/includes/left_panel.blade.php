@@ -1,6 +1,6 @@
 <div class="br-logo">
      <a href="{{ route('dashboard') }}">
-          <!-- <img src="" class="left-panel-logo" alt="Company Logo"> -->
+          <img src="{{ asset('backend/images/logo.svg') }}" class="left-panel-logo" alt="Company Logo">
      </a>
 </div>
 <div class="br-sideleft sideleft-scrollbar">

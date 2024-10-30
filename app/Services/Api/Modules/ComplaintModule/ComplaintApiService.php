@@ -33,10 +33,13 @@ class ComplaintApiService
           }
      }
 
-     public function list($request)
+     public function list()
      {
           try {
-               $query = $this->complaint_read_repository->fetch_all_complaint($request);
+               $params = [
+                    "user_id" => $this->auth->id,
+               ];
+               $query = $this->complaint_read_repository->fetch_all_complaint($params);
                return $this->success($query->get(),"Complaints");
           } catch (Exception $e) {
                return $this->error(null, $e->getMessage());

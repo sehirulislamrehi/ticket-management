@@ -40,7 +40,7 @@ class EditComplaintRequest extends FormRequest
                 'required',
                 Rule::in(ComplaintStatusEnum::all())
             ],
-            'submission_date' => 'required|date|after_or_equal:today',
+            // 'submission_date' => 'required|date|after_or_equal:today',
             'image' => 'file|mimes:jpg,png,jpeg,webp|max:1000'
         ];
     }

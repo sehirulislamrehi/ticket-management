@@ -2,14 +2,25 @@
      <div class="br-header-left">
           <div class="navicon-left hidden-md-down"><a id="btnLeftMenu" href=""><i class="icon ion-navicon-round"></i></a></div>
           <div class="navicon-left hidden-lg-up"><a id="btnLeftMenuMobile" href=""><i class="icon ion-navicon-round"></i></a></div>
-
      </div>
      <div class="br-header-right">
           <nav class="nav">
 
                <div class="dropdown">
+                    <a href="" class="nav-link nav-link-profile" data-toggle="dropdown" onclick="fetch_my_notification()">
+                         <img src="{{ asset('backend/images/bell.svg') }}" class="wd-32 rounded-circle" alt="">
+                         <span class="square-10"><strong id="notification_count">0</strong></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-header wd-500" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-65px, 1px, 0px);">
+                         <ul class="list-unstyled user-profile-nav" id="notification-list">
+                              <li>No notification found</li>
+                         </ul>
+                         <a href="" style="display: block; text-align: center">See All</a>
+                    </div>
+               </div>
+               <div class="dropdown">
                     <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
-                         <img src="{{ asset('images/user.png') }}" class="wd-32 rounded-circle" alt="">
+                         <img src="{{ asset('backend/images/user.png') }}" class="wd-32 rounded-circle" alt="">
                          <span class="square-10 bg-success"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-header wd-250" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-65px, 1px, 0px);">
@@ -23,7 +34,7 @@
                               <li><a href="{{ route('user.edit.my.profile.page') }}"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
                               <li>
                                    <a href="#" onclick="document.getElementById('logout-form').submit()">
-                                        <i class="icon ion-power"></i> 
+                                        <i class="icon ion-power"></i>
                                         Sign Out
                                         <form action="{{route('do.logout')}}" method="post" id="logout-form">@csrf</form>
                                    </a>
@@ -34,3 +45,4 @@
           </nav>
      </div>
 </div>
+

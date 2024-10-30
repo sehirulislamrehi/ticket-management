@@ -21,8 +21,8 @@ class ComplaintApiController extends Controller
     public function create(CreateComplaintRequest $request){
         return $this->complaint_api_service->create($request);
     }
-    public function list(ComplaintListRequest $request){
-        return $this->complaint_api_service->list($request);
+    public function list(){
+        return $this->complaint_api_service->list();
     }
     public function details($id){
         return $this->complaint_api_service->details($id);

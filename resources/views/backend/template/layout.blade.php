@@ -142,6 +142,7 @@
     <!-- ########## END: MAIN PANEL ########## -->
 
     @include("backend.includes.script")
+    @include("backend.includes.pusher")
 
     @include('backend.includes.footer')
 

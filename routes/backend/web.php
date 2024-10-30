@@ -23,6 +23,10 @@ Route::group(['prefix' => 'admindashboard', 'middleware' => 'admin_auth'], funct
         require_once "report_module/dashboard.php";
     });
 
+    Route::group(['prefix' => 'notification-module'], function(){
+        require_once "notification_module/notification.php";
+    });
+
 });
 
 ?>

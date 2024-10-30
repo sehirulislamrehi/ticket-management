@@ -14,8 +14,8 @@
      <div class="card-body">
           <div class="row">
 
-               <div class="col-md-4 col-6">
-                    <div class="card card-total" style="background: #f8ff97">
+               <div class="col-xl-4 col-lg-12 col-md-12 col-12 mb-2">
+                    <div class="card card-total" style="background: #00B5B5">
                          <div class="card-body">
                               <h5>Low</h5>
                               <div class="d-flex justify-content-between align-items-center">
@@ -27,8 +27,8 @@
                     </div>
                </div>
 
-               <div class="col-md-4 col-6">
-                    <div class="card card-total" style="background: #8fffb2">
+               <div class="col-xl-4 col-lg-12 col-md-12 col-12 mb-2">
+                    <div class="card card-total" style="background: #5AC8FA">
                          <div class="card-body">
                               <h5>Medium</h5>
                               <div class="d-flex justify-content-between align-items-center">
@@ -40,8 +40,8 @@
                     </div>
                </div>
 
-               <div class="col-md-4 col-6">
-                    <div class="card card-total" style="background: #bce1fd;">
+               <div class="col-xl-4 col-lg-12 col-md-12 col-12 mb-2">
+                    <div class="card card-total" style="background: #8A56AC;">
                          <div class="card-body">
                               <h5>High</h5>
                               <div class="d-flex justify-content-between align-items-center">
