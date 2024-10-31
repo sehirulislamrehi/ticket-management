@@ -15,7 +15,7 @@ class NotificationReadRepository implements NotificationReadInterface{
 
      public function fetch_all_notification($params){
           $auth = $this->auth;
-          $query = Notification::query()->select("id","message")->where("to_user_id", $auth->id);
+          $query = Notification::query()->select("id","message","is_viewed","link")->where("to_user_id", $auth->id);
 
           if( isset($params['is_viewed']) ){
                $query = $query->where("is_viewed", $params['is_viewed']);

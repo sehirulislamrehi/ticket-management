@@ -15,7 +15,7 @@
                          <ul class="list-unstyled user-profile-nav" id="notification-list">
                               <li>No notification found</li>
                          </ul>
-                         <a href="" style="display: block; text-align: center">See All</a>
+                         <a href="{{ route('notification.all') }}" style="display: block; text-align: center">See All</a>
                     </div>
                </div>
                <div class="dropdown">

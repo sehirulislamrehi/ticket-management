@@ -19,6 +19,10 @@ class NotificationWriteRepository implements NotificationWriteInterface{
           ]);
      }
 
+     public function delete_notification($id){
+          return Notification::where("id", $id)->delete();
+     }
+
 }
 
 ?>

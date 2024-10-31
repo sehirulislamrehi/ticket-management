@@ -22,7 +22,7 @@ $auth = auth('web')->user();
                          response.data.forEach(notification => {
                               // Create a new list item
                               let listItem = document.createElement('li');
-                              listItem.setAttribute('onclick', `handleNotificationClick('${notification.id}')`); // Adjust the id as needed
+                              listItem.setAttribute('onclick', `handleNotificationClick('${notification.id}', this)`); // Adjust the id as needed
                               listItem.textContent = notification.message; // Adjust this to match the actual property of your notification object
                               notification_list.appendChild(listItem);
                          });
@@ -38,7 +38,7 @@ $auth = auth('web')->user();
                })
      }
 
-     function handleNotificationClick(id){
+     function handleNotificationClick(id, e){
           let url = "{{ route('notification.make.view',':id') }}"
           url = url.replace(':id',id)
           fetch(url, {
@@ -47,6 +47,11 @@ $auth = auth('web')->user();
                .then(response => response.json())
                .then(response => {
                     if(response.status == "success"){
+                         if(e.dataset.icon){
+                              e.classList.remove('fa-eye');
+                              e.classList.add('fa-eye-slash');
+                              e.removeAttribute('onclick');
+                         }
                          fetch_my_notification()
                     }
                })

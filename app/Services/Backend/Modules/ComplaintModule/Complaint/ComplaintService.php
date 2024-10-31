@@ -5,6 +5,7 @@ namespace App\Services\Backend\Modules\ComplaintModule\Complaint;
 use App\Enum\ComplaintCategoryEnum;
 use App\Enum\ComplaintPriorityEnum;
 use App\Enum\ComplaintStatusEnum;
+use App\Events\NotificationModule\SendNotificationEvent;
 use App\Interfaces\ComplaintModule\Complaint\ComplaintReadInterface;
 use App\Interfaces\ComplaintModule\Complaint\ComplaintWriteInterface;
 use App\Interfaces\NotificationModule\Notification\NotificationWriteInterface;
@@ -232,6 +233,7 @@ class ComplaintService
 
                 //save notification for update complaint successfully
                 if($auth->id != $complaint->created_by){
+
                     $params = [
                         "from_user_id" => $auth->id,
                         "to_user_id" => $auth->id,

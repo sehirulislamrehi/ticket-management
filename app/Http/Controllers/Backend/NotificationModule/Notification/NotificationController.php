@@ -24,4 +24,18 @@ class NotificationController extends Controller
         return $this->notification_service->make_notification_view($id);
     }
 
+    public function index(){
+        return $this->notification_service->index();
+    }
+
+    public function data(){
+        return $this->notification_service->data();
+    }
+
+    public function delete_modal($id){
+        return $this->notification_service->delete_modal($id);
+    }
+    public function delete($id){
+        return $this->notification_service->delete($id);
+    }
 }
