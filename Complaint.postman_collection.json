@@ -1,0 +1,418 @@
+{
+	"info": {
+		"_postman_id": "8d4f07a9-47ff-4d37-a0e4-2bbf252f1376",
+		"name": "Complaint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30161299"
+	},
+	"item": [
+		{
+			"name": "Create_Complaint",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{API_TOKEN}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Order not delivered",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Order not delivered",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "billing",
+							"description": "billing,service_issue,product_issue",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "medium",
+							"description": "low,medium,high",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "open",
+							"description": "open,in_progress,resolved,closed",
+							"type": "text"
+						},
+						{
+							"key": "submission_date",
+							"value": "2024-10-30",
+							"description": "2024-10-30",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"description": "nullable",
+							"type": "file",
+							"src": "/C:/Users/Administrator/Downloads/2.jpg"
+						}
+					]
+				},
+				"url": "{{BASE_URL_LOCAL}}/api/v1/complaint/create"
+			},
+			"response": [
+				{
+					"name": "Create_Complaint",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Order not delivered",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Order not delivered",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "billing",
+									"description": "billing,service_issue,product_issue",
+									"type": "text"
+								},
+								{
+									"key": "priority",
+									"value": "medium",
+									"description": "low,medium,high",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "open",
+									"description": "open,in_progress,resolved,closed",
+									"type": "text"
+								},
+								{
+									"key": "submission_date",
+									"value": "2024-10-30",
+									"description": "2024-10-30",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"description": "nullable",
+									"type": "file",
+									"src": "/C:/Users/Administrator/Downloads/2.jpg"
+								}
+							]
+						},
+						"url": "{{BASE_URL_LOCAL}}/api/v1/complaint/create"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8001"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 04:10:51 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 04:10:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Complaint created\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "My_Complaints",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{API_TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL_LOCAL}}/api/v1/complaints?user_id=1",
+					"host": [
+						"{{BASE_URL_LOCAL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"complaints"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "My_Complaints",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{BASE_URL_LOCAL}}/api/v1/complaints"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 15:27:42 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Complaints\",\n    \"data\": [\n        {\n            \"id\": 19,\n            \"title\": \"Damaged Product Received\",\n            \"description\": \"Product received with visible physical damage.\",\n            \"category\": \"product_issue\",\n            \"priority\": \"high\",\n            \"status\": \"open\",\n            \"image\": null,\n            \"created_by\": 2,\n            \"submission_date\": \"2024-10-17\",\n            \"resolved_at\": \"2024-10-20\",\n            \"time_taken\": \"259200\",\n            \"day_taken\": \"3\",\n            \"created_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"updated_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"image_url\": null,\n            \"created_user\": {\n                \"id\": 2,\n                \"name\": \"Md Shuvo\",\n                \"email\": \"shuvo@gmail.com\",\n                \"phone\": \"017xxxxxxxx\",\n                \"image\": null,\n                \"role_id\": 1,\n                \"is_active\": 1,\n                \"is_super_admin\": 0,\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        },\n        {\n            \"id\": 15,\n            \"title\": \"Payment Reversal Delay\",\n            \"description\": \"Delayed response for payment reversal after cancellation.\",\n            \"category\": \"billing\",\n            \"priority\": \"high\",\n            \"status\": \"in_progress\",\n            \"image\": null,\n            \"created_by\": 2,\n            \"submission_date\": \"2024-10-20\",\n            \"resolved_at\": \"2024-10-22\",\n            \"time_taken\": \"172800\",\n            \"day_taken\": \"2\",\n            \"created_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"updated_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"image_url\": null,\n            \"created_user\": {\n                \"id\": 2,\n                \"name\": \"Md Shuvo\",\n                \"email\": \"shuvo@gmail.com\",\n                \"phone\": \"017xxxxxxxx\",\n                \"image\": null,\n                \"role_id\": 1,\n                \"is_active\": 1,\n                \"is_super_admin\": 0,\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        },\n        {\n            \"id\": 13,\n            \"title\": \"Account Recovery Issue\",\n            \"description\": \"Account Recovery Issue\",\n            \"category\": \"service_issue\",\n            \"priority\": \"high\",\n            \"status\": \"resolved\",\n            \"image\": null,\n            \"created_by\": 2,\n            \"submission_date\": \"2024-10-15\",\n            \"resolved_at\": \"2024-10-17\",\n            \"time_taken\": \"172800\",\n            \"day_taken\": \"2\",\n            \"created_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"updated_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"image_url\": null,\n            \"created_user\": {\n                \"id\": 2,\n                \"name\": \"Md Shuvo\",\n                \"email\": \"shuvo@gmail.com\",\n                \"phone\": \"017xxxxxxxx\",\n                \"image\": null,\n                \"role_id\": 1,\n                \"is_active\": 1,\n                \"is_super_admin\": 0,\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        },\n        {\n            \"id\": 9,\n            \"title\": \"Product Defect Issue\",\n            \"description\": \"Product Defect Issue\",\n            \"category\": \"product_issue\",\n            \"priority\": \"high\",\n            \"status\": \"resolved\",\n            \"image\": null,\n            \"created_by\": 2,\n            \"submission_date\": \"2024-09-18\",\n            \"resolved_at\": \"2024-09-22\",\n            \"time_taken\": \"345600\",\n            \"day_taken\": \"4\",\n            \"created_at\": \"2024-07-30T15:04:40.000000Z\",\n            \"updated_at\": \"2024-07-30T15:04:40.000000Z\",\n            \"image_url\": null,\n            \"created_user\": {\n                \"id\": 2,\n                \"name\": \"Md Shuvo\",\n                \"email\": \"shuvo@gmail.com\",\n                \"phone\": \"017xxxxxxxx\",\n                \"image\": null,\n                \"role_id\": 1,\n                \"is_active\": 1,\n                \"is_super_admin\": 0,\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        },\n        {\n            \"id\": 5,\n            \"title\": \"Refund Not Processed\",\n            \"description\": \"Refund Not Processed\",\n            \"category\": \"billing\",\n            \"priority\": \"high\",\n            \"status\": \"closed\",\n            \"image\": null,\n            \"created_by\": 2,\n            \"submission_date\": \"2024-10-10\",\n            \"resolved_at\": \"2024-10-15\",\n            \"time_taken\": \"432000\",\n            \"day_taken\": \"5\",\n            \"created_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"updated_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"image_url\": null,\n            \"created_user\": {\n                \"id\": 2,\n                \"name\": \"Md Shuvo\",\n                \"email\": \"shuvo@gmail.com\",\n                \"phone\": \"017xxxxxxxx\",\n                \"image\": null,\n                \"role_id\": 1,\n                \"is_active\": 1,\n                \"is_super_admin\": 0,\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        },\n        {\n            \"id\": 1,\n            \"title\": \"Billing Discrepancy Issue\",\n            \"description\": \"Billing Discrepancy Issue\",\n            \"category\": \"billing\",\n            \"priority\": \"low\",\n            \"status\": \"resolved\",\n            \"image\": null,\n            \"created_by\": 2,\n            \"submission_date\": \"2024-10-28\",\n            \"resolved_at\": \"2024-10-29\",\n            \"time_taken\": \"86400\",\n            \"day_taken\": \"1\",\n            \"created_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"updated_at\": \"2024-09-30T15:04:40.000000Z\",\n            \"image_url\": null,\n            \"created_user\": {\n                \"id\": 2,\n                \"name\": \"Md Shuvo\",\n                \"email\": \"shuvo@gmail.com\",\n                \"phone\": \"017xxxxxxxx\",\n                \"image\": null,\n                \"role_id\": 1,\n                \"is_active\": 1,\n                \"is_super_admin\": 0,\n                \"created_at\": null,\n                \"updated_at\": null\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Complaint_Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{API_TOKEN}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{BASE_URL_LOCAL}}/api/v1/complaints/3"
+			},
+			"response": [
+				{
+					"name": "Complaint_Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "{{BASE_URL_LOCAL}}/api/v1/complaints/3"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8001"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 06:12:20 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 06:12:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Complaint details\",\n    \"data\": {\n        \"id\": 3,\n        \"title\": \"Order not delivered\",\n        \"description\": \"Order not delivered\",\n        \"category\": \"billing\",\n        \"priority\": \"medium\",\n        \"status\": \"open\",\n        \"image\": \"32134_1730265280.jpg\",\n        \"created_by\": 1,\n        \"submission_date\": \"2024-10-30\",\n        \"resolved_at\": null,\n        \"time_taken\": \"0\",\n        \"day_taken\": \"0\",\n        \"created_at\": \"2024-10-30T05:14:40.000000Z\",\n        \"updated_at\": \"2024-10-30T05:14:40.000000Z\",\n        \"image_url\": \"/storage/complaints/32134_1730265280.jpg\",\n        \"created_user\": {\n            \"id\": 1,\n            \"name\": \"Md Sehirul Islam Rehi\",\n            \"email\": \"mdsehirulislamrehi@gmail.com\",\n            \"phone\": \"01858361812\",\n            \"image\": null,\n            \"role_id\": null,\n            \"is_active\": 1,\n            \"is_super_admin\": 1,\n            \"created_at\": null,\n            \"updated_at\": null\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Complaint_Status_Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{API_TOKEN}}"
+					}
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"open\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{BASE_URL_LOCAL}}/api/v1/complaints/1"
+			},
+			"response": [
+				{
+					"name": "Complaint_Status_Update",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"open\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{BASE_URL_LOCAL}}/api/v1/complaints/1"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8001"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 06:41:24 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 06:41:24 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Complaint status updated\",\n    \"data\": []\n}"
+				}
+			]
+		}
+	]
+}

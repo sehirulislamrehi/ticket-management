@@ -13,14 +13,14 @@
     <meta name="twitter:site" content="@themepixels">
     <meta name="twitter:creator" content="@themepixels">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Task Management">
-    <meta name="twitter:description" content="Task Management">
+    <meta name="twitter:title" content="Complaint Ticket Management">
+    <meta name="twitter:description" content="Complaint Ticket Management">
     <meta name="twitter:image" content="http://themepixels.me/bracketplus/img/bracketplus-social.png">
 
     <!-- Facebook -->
     <meta property="og:url" content="http://themepixels.me/bracketplus">
-    <meta property="og:title" content="Task Management">
-    <meta property="og:description" content="Task Management">
+    <meta property="og:title" content="Complaint Ticket Management">
+    <meta property="og:description" content="Complaint Ticket Management">
 
     <meta property="og:image" content="http://themepixels.me/bracketplus/img/bracketplus-social.png">
     <meta property="og:image:secure_url" content="http://themepixels.me/bracketplus/img/bracketplus-social.png">
@@ -29,7 +29,7 @@
     <meta property="og:image:height" content="600">
 
     <!-- Meta -->
-    <meta name="description" content="Task Management">
+    <meta name="description" content="Complaint Ticket Management">
     <meta name="author" content="ThemePixels">
 
     <title>Login Here</title>

@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "0dfc8010-37a5-4dbc-8029-dd06cadd60f8",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30161299"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "mdsehirulislamrehi@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": "{{BASE_URL_LOCAL}}/api/v1/login"
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "mdsehirulislamrehi@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/v1/login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8001"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 03:42:05 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2024 03:42:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"success\",\n    \"message\": \"Login success\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Md Sehirul Islam Rehi\",\n            \"email\": \"mdsehirulislamrehi@gmail.com\",\n            \"phone\": \"01858361812\",\n            \"image\": null,\n            \"role_id\": null,\n            \"is_active\": 1,\n            \"is_super_admin\": 1,\n            \"created_at\": null,\n            \"updated_at\": null\n        },\n        \"api_token\": \"1|6E0VIsTmo4wRFX7qtLKnCby9RsQx9OmkmvG7YGRM15b690f5\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
