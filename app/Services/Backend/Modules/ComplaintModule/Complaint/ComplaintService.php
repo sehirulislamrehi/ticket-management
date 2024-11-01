@@ -120,17 +120,17 @@ class ComplaintService
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdown' . $complaints->id . '">
             
-                ' . (can("edit_complaint") ? '
-                <a class="dropdown-item" href="#" data-content="' . route('complaint.edit.modal', encrypt($complaints->id)) . '" data-target="#myModal" class="btn btn-outline-dark" data-toggle="modal">
-                    <i class="fas fa-edit"></i>
-                    Edit
-                </a>
-                ' : '') . '
-
                 ' . (can("complaint") ? '
                 <a class="dropdown-item" href="#" data-content="' . route('complaint.details', encrypt($complaints->id)) . '" data-target="#largeModal" class="btn btn-outline-dark" data-toggle="modal">
                     <i class="fas fa-eye"></i>
                     View
+                </a>
+                ' : '') . '
+
+                ' . (can("edit_complaint") ? '
+                <a class="dropdown-item" href="#" data-content="' . route('complaint.edit.modal', encrypt($complaints->id)) . '" data-target="#myModal" class="btn btn-outline-dark" data-toggle="modal">
+                    <i class="fas fa-edit"></i>
+                    Edit
                 </a>
                 ' : '') . '
 

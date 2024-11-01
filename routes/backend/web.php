@@ -17,6 +17,7 @@ Route::group(['prefix' => 'admindashboard', 'middleware' => 'admin_auth'], funct
 
     Route::group(['prefix' => 'complaint-module'], function(){
         require_once "complaint_module/complaint.php";
+        require_once "complaint_module/complaint_comment.php";
     });
 
     Route::group(['prefix' => 'report-module'], function(){
