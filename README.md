@@ -21,3 +21,4 @@
      - User can see his/her notifications.
      - View and not viewed notification will separately identified.
      - User can delete his/her notification.
+     - Pusher credentials already set into the PusherService.
