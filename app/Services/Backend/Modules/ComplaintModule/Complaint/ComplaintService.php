@@ -299,8 +299,9 @@ class ComplaintService
                 $category = collect($complaint_category)->where("key", $complaint->category)->first();
                 $priority = collect($complaint_priority)->where("key", $complaint->priority)->first();
                 $status = collect($complaint_status)->where("key", $complaint->status)->first();
+                $auth = $this->auth;
 
-                return view("backend.modules.complaint_module.complaint.modals.details", compact("complaint_category", "complaint_priority", "complaint_status", "complaint", "image_link", "time_taken", "category", "priority", "status"));
+                return view("backend.modules.complaint_module.complaint.modals.details", compact("complaint_category", "complaint_priority", "complaint_status", "complaint", "image_link", "time_taken", "category", "priority", "status", "auth"));
             } catch (Exception $e) {
                 return $e->getMessage();
             }

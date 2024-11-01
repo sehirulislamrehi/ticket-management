@@ -16,8 +16,19 @@ class ComplaintCommentController extends Controller
         $this->complaint_comment_service = $complaint_comment_service;
     }
 
-    public function add(Request $request){
-        return $this->complaint_comment_service->add($request);
+    public function add(Request $request, $id){
+        return $this->complaint_comment_service->add($request, $id);
     }
 
+    public function get($id){
+        return $this->complaint_comment_service->get($id);
+    }
+
+    public function edit(Request $request, $id){
+        return $this->complaint_comment_service->edit($request, $id);
+    }
+
+    public function delete($id){
+        return $this->complaint_comment_service->delete($id);
+    }
 }

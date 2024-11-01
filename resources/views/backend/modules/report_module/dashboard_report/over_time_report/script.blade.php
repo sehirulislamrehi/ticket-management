@@ -80,10 +80,6 @@
                         stroke: {
                             curve: 'smooth'
                         },
-                        title: {
-                            text: `Resolved Over Time`,
-                            align: 'left'
-                        },
                         grid: {
                             row: {
                                 colors: ['#f3f3f3', 'transparent'], // Background color for grid rows

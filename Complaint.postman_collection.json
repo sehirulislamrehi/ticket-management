@@ -189,7 +189,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{BASE_URL_LOCAL}}/api/v1/complaints?user_id=1",
+					"raw": "{{BASE_URL_LOCAL}}/api/v1/complaints",
 					"host": [
 						"{{BASE_URL_LOCAL}}"
 					],
@@ -197,12 +197,6 @@
 						"api",
 						"v1",
 						"complaints"
-					],
-					"query": [
-						{
-							"key": "user_id",
-							"value": "1"
-						}
 					]
 				}
 			},

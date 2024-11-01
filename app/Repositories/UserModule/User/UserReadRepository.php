@@ -21,7 +21,7 @@ class UserReadRepository implements UserReadInterface
     public function get_all_user_data()
     {
         $auth = auth('web')->user();
-        return User::orderBy('id', 'desc')->select("id", "name", "email", "phone", "is_active", "role_id", "image")->where("id","!=",$auth->id)->with("role");
+        return User::orderBy('id', 'desc')->select("id", "name", "email", "phone", "is_active", "role_id", "image")->where("id","!=",$auth->id)->where("is_super_admin", false)->with("role");
     }
 
     public function get_active_user_data()

@@ -10,5 +10,8 @@ trait FilePathTrait
     if ($type === "complaint") {
       return "complaints";
     }
+    if ($type === "profile") {
+      return "profile";
+    }
   }
 }

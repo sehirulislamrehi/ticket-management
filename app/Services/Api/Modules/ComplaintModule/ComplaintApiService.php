@@ -26,8 +26,8 @@ class ComplaintApiService
      public function create($request)
      {
           try {
-               $this->complaint_write_repository->add($request);
-               return $this->success(null, "Complaint created");
+               $complaint = $this->complaint_write_repository->add($request);
+               return $this->success($complaint, "Complaint created");
           } catch (Exception $e) {
                return $this->error(null, $e->getMessage());
           }

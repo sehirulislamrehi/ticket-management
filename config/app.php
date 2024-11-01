@@ -137,6 +137,7 @@ return [
         App\Providers\Modules\UserModule\UserServiceProvider::class,
         App\Providers\Modules\ComplaintModule\ComplaintServiceProvider::class,
         App\Providers\Modules\NotificationModule\NotificationServiceProvider::class,
+        App\Providers\Modules\ComplaintModule\ComplaintCommentServiceProvider::class,
     ])->toArray(),
 
     /*

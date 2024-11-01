@@ -55,7 +55,8 @@ class ComplaintWriteRepository implements ComplaintWriteInterface
             }
         }
 
-        return $complaint->save();
+        $complaint->save();
+        return $complaint;
     }
 
     public function edit($request, $complaint){

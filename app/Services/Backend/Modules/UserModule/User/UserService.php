@@ -208,9 +208,8 @@ class UserService
             ->rawColumns(['action', 'is_active', 'role_id', 'image'])
             ->editColumn('image', function (User $user) {
 
-
                 if ($user->image == null) {
-                    $image = asset("images/profile/user.png");
+                    $image = asset("backend/images/user.png");
                 } else {
                     $image = $this->common_service->get_image_link($user->image, $this->get_file_path("profile"));
                 }

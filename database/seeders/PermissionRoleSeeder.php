@@ -16,7 +16,7 @@ class PermissionRoleSeeder extends Seeder
     {
         DB::statement("DELETE FROM permission_role");
 
-        $permission_ids = [1,2,3,4,5,6];
+        $permission_ids = [1,2,3,4,5,7,8,9,10];
         $insert_array = [];
         foreach( $permission_ids as $key => $permission_id ){
             array_push($insert_array, [

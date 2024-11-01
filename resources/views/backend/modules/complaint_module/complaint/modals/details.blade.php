@@ -107,17 +107,7 @@
                 <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="event-modal right">
                         <div class="comments-section">
-                            <h3>Comments</h3>
                             <div id="comments">
-                                <div class="comment">
-                                    <div class="comment-content">
-                                        <p><strong>Jane Smith:</strong> Thanks for assigning me on the task. We’ll get the details ironed out.</p>
-                                        <div class="comment-actions">
-                                            <button class="edit-comment-btn"><i class="fas fa-edit"></i></button>
-                                            <button class="delete-comment-btn"><i class="fas fa-trash"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,16 +123,18 @@
 <script>
     'use strict';
 
+    var id = "{{ $complaint->id }}";
     var commentsSection = document.getElementById('comments');
     var newCommentInput = document.getElementById('new-comment');
     var addCommentBtn = document.getElementById('add-comment-btn');
     var completeBtn = document.getElementById('complete-btn');
     var deleteBtn = document.getElementById('delete-btn');
+    var auth = @json($auth);
 
     function addComment(e) {
         const commentText = newCommentInput.value.trim();
         if (commentText) {
-            let id = "{{ $complaint->id }}";
+            id = "{{ $complaint->id }}";
             let url = "{{ route('complaint.comment.add',':id') }}";
             url = url.replace(':id',id)
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -158,53 +150,105 @@
             })
             .then( response => response.json() )
             .then( response => {
-                console.log(response)
+                if(response.status == "success"){
+                    createCommentDom(response.data, auth)
+                }
             })
             .catch( response => {
                 console.log(response)
             })
 
-            // let commentDiv = document.createElement('div');
-            // commentDiv.classList.add('comment');
-            // commentDiv.innerHTML = `
-            //     <div class="comment-content">
-            //         <p><string>Rehi</strong>${commentText}</p>
-            //         <div class="comment-actions">
-            //             <button class="edit-comment-btn"><i class="fas fa-edit"></i></button>
-            //             <button class="delete-comment-btn"><i class="fas fa-trash"></i></button>
-            //         </div>
-            //     </div>
-            // `;
-            // commentsSection.prepend(commentDiv);
-            // newCommentInput.value = '';
-
-            // // Add delete functionality to new comment
-            // commentDiv.querySelector('.delete-comment-btn').addEventListener('click', () => {
-            //     commentDiv.remove();
-            // });
-
-            // // Add edit functionality to new comment
-            // commentDiv.querySelector('.edit-comment-btn').addEventListener('click', () => {
-            //     editComment(commentDiv);
-            // });
         }
     }
 
-    // Add new comment
+    // fetch comments
+    function fetch_comments(id){
+        let url = "{{ route('complaint.comments',':id') }}";
+        url = url.replace(':id',id)
+        fetch(url,{
+            method: 'GET',
+        })
+        .then( response => response.json() )
+        .then( response => {
 
+            response.data.map((value, key) => {
+                createCommentDom(value, auth)
+            })
+
+        })
+        .catch( response => {
+            console.log(response)
+        })
+    }
+    fetch_comments(id);
+
+    function createCommentDom(data, auth){
+        let commentDiv = document.createElement('div');
+        commentDiv.classList.add('comment');
+        commentDiv.innerHTML = `
+            <div class="comment-content">
+                <p><string>${data.user.name}</strong></p>
+                <p id="comment-box-${data.id}">${data.comment}</p>
+                <div class="comment-actions">
+                    ${(auth.id == data.user.id) ? `
+                    <button type="button" onclick="editComment(this, ${data.id})">Edit</button>
+                    <button type="button" onclick="deleteComment(this, ${data.id})">Delete</button>
+                    ` : ``}
+                </div>
+            </div>
+        `;
+        commentsSection.prepend(commentDiv);
+        newCommentInput.value = '';
+    }
 
     // Delete event
-    // deleteBtn.addEventListener('click', () => {
-    //     if (confirm('Are you sure you want to delete this event?')) {
-    //         document.querySelector('.event-modal').remove();
-    //     }
-    // });
+    function deleteComment(e, id){
+        if (confirm('Are you sure you want to delete this event?')) {
+            let url = "{{ route('complaint.comment.delete',':id') }}";
+            url = url.replace(':id',id)
 
-    // function editComment(commentDiv) {
-    //     const commentText = commentDiv.querySelector('p').innerText.split(': ')[1];
-    //     const newCommentText = prompt('Edit your comment:', commentText);
-    //     if (newCommentText !== null) {
-    //         commentDiv.querySelector('p').innerHTML = `${newCommentText}`;
-    //     }
-    // }
+            fetch(url,{
+                method: 'GET',
+            })
+            .then( response => response.json() )
+            .then( response => {
+                if(response.status == "success"){
+                    e.parentElement.parentElement.parentElement.remove()
+                }
+            })
+            .catch( response => {
+                console.log(response)
+            })
+        }
+    }
+
+    function editComment(e, id) {
+        let commentBox = document.getElementById(`comment-box-${id}`);
+        const commentText = commentBox.innerHTML;
+        const newCommentText = prompt('Edit your comment:', commentText);
+        if (newCommentText !== null) {
+            let url = "{{ route('complaint.comment.edit',':id') }}";
+            url = url.replace(':id',id)
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            let formData = new FormData();
+            formData.append('comment',newCommentText)
+
+            fetch(url,{
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: formData
+            })
+            .then( response => response.json() )
+            .then( response => {
+                if(response.status == "success"){
+                    commentBox.innerHTML = newCommentText
+                }
+            })
+            .catch( response => {
+                console.log(response)
+            })
+        }
+    }
 </script>
