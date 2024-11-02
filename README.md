@@ -2,7 +2,7 @@
 ## Project installation guide
      - Run composer update to install the dependencies
      - Run migrate and seed command.
-     - You can update the user seeder data. Demo compalint data will create based on user id 1 to 4.
+     - You can update the user seeder data with your suitable credentials to test. Demo compalint data will create based on user id 1 to 4.
      - The api are given as postman collection in the root directory with the name of "Auth.postman_collection.json" and "Complaint.postman_collection.json". Import it to the postman to use the api.
 
 ## User Module
