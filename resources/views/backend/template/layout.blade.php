@@ -80,7 +80,7 @@
 </head>
 
 <body>
-
+    
     @if( session()->has('success') || session()->has('warning') || session()->has('error') )
     <div class="alert alert-dismissible fade show custom-alert" role="alert">
         <div class="logo">

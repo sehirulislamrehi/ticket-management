@@ -1,4 +1,5 @@
 
+
 <link rel="shortcut icon" href="{{ asset('backend/images/fav.jpg') }}">
 
 <!-- vendor css -->

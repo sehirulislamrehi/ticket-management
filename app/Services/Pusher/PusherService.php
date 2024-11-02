@@ -41,6 +41,6 @@ class PusherService
           $data['status'] = 'success';
           $data['message'] = $params['message'];
           $data['data'] = $params['data'];
-          $pusher->trigger("auth-{$params['to_user_id']}", 'my-event', $data);
+          $pusher->trigger($params['event'], 'my-event', $data);
      }
 }

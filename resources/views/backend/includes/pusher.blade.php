@@ -71,7 +71,7 @@ $auth = auth('web')->user();
           cluster: 'ap2'
      });
 
-     var channel = pusher.subscribe(`auth-${auth_id}`);
+     var channel = pusher.subscribe(`notification-${auth_id}`);
      channel.bind('my-event', function(data) {
           fetch_my_notification();
      });

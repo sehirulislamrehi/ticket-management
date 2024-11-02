@@ -182,7 +182,8 @@ class ComplaintService
                 $pusher_params = [
                     "to_user_id" => $auth->id,
                     "message" => $params['message'],
-                    "data" => []
+                    "data" => [],
+                    "event" => "notification-{$auth->id}"
                 ];
                 $this->pusher_service->trigger($pusher_params);
 
@@ -222,6 +223,7 @@ class ComplaintService
     {
         if (can("edit_complaint")) {
             try {
+
                 $auth = $this->auth;
                 $id = decrypt($id);
                 $complaint = $this->complaint_read_repository->fetch_complaint_by_id($id);
@@ -248,7 +250,8 @@ class ComplaintService
                     $pusher_params = [
                         "to_user_id" => $auth->id,
                         "message" => $params['message'],
-                        "data" => []
+                        "data" => [],
+                        "event" => "notification-{$auth->id}"
                     ];
                     $this->pusher_service->trigger($pusher_params);
                 }
@@ -269,7 +272,8 @@ class ComplaintService
                 $pusher_params = [
                     "to_user_id" => $complaint->created_by,
                     "message" => $params['message'],
-                    "data" => []
+                    "data" => [],
+                    "event" => "notification-{$auth->id}"
                 ];
                 $this->pusher_service->trigger($pusher_params);
 
