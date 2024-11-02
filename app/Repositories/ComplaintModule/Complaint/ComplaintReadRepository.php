@@ -158,17 +158,21 @@ class ComplaintReadRepository implements ComplaintReadInterface
                 DB::raw('YEAR(created_at) as year'),
                 DB::raw('MONTHNAME(created_at) as month'),
                 DB::raw('COUNT(*) as complaint_submitted'),
-                DB::raw('SUM(CASE WHEN status = "'.$resolved.'" THEN 1 ELSE 0 END) as total_resolved'), 
-                DB::raw('SUM(CASE WHEN status = "'.$closed.'" THEN 1 ELSE 0 END) as total_closed'),
+                DB::raw('SUM(CASE WHEN status = "resolved" THEN 1 ELSE 0 END) as total_resolved'), 
+                DB::raw('SUM(CASE WHEN status = "closed" THEN 1 ELSE 0 END) as total_closed'),
+                DB::raw('MAX(created_at) as latest_created_at') // Use MAX to get the latest date within each group
             )
             ->where('created_at', '>=', $twoMonthsAgo);
-
-        if(!$auth->is_super_admin){
-            $query = $query->where("created_by", $auth->id);
+        
+        if (!$auth->is_super_admin) {
+            $query->where("created_by", $auth->id);
         }
+        
+        return $query->groupBy('year', 'month')
+            ->orderBy('year', 'desc')
+            ->orderBy('latest_created_at', 'asc') // Use latest_created_at for ordering
+            ->get();
 
-        return $query->groupBy('year', 'month') // Group by year and month without referencing created_at directly
-        ->orderBy('year', 'desc')
-        ->orderBy(DB::raw('MONTH(created_at)'), 'asc')->get();
+
     }
 }

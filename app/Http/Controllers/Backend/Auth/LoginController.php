@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Modules\Auth\LoginRequest;
 use App\Services\Backend\Auth\AuthenticationService;
 use App\Traits\ApiResponseTrait;
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 
 class LoginController extends Controller
 {
@@ -22,6 +23,7 @@ class LoginController extends Controller
 
     public function index(){
         if (auth('web')->check()) {
+            Artisan::call("migrate");
             return redirect()->route("dashboard");
         } else {
             return view("backend.auth.login");
