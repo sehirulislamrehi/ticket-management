@@ -273,7 +273,7 @@ class ComplaintService
                     "to_user_id" => $complaint->created_by,
                     "message" => $params['message'],
                     "data" => [],
-                    "event" => "notification-{$auth->id}"
+                    "event" => "notification-{$complaint->created_by}"
                 ];
                 $this->pusher_service->trigger($pusher_params);
 
