@@ -3,7 +3,7 @@
      - Run composer update to install the dependencies
      - Run migrate and seed command.
      - You can update the user seeder data. Demo compalint data will create based on user id 1 to 4.
-     - The api are given as postman collection. Import it to the postman to use the api.
+     - The api are given as postman collection in the root directory with the name of "Auth.postman_collection.json" and "Complaint.postman_collection.json". Import it to the postman to use the api.
 
 ## User Module
      - There is a super admin account. Using that account no restriction will be shown.
@@ -22,3 +22,4 @@
      - View and not viewed notification will separately identified.
      - User can delete his/her notification.
      - Pusher credentials already set into the PusherService.
+
